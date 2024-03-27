@@ -31,19 +31,19 @@ Resources:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: Retain
     Properties:
-      BucketName: "testzm1"
+      BucketName: "tedx-data-mz"
 
   ScriptS3Bucket:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: Retain
     Properties:
-      BucketName: "tedx2024"
+      BucketName: "tedx-script-mz"
 
   logS3Bucket:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: Retain
     Properties:
-      BucketName: "tedx2024log"
+      BucketName: "tedx-log-mz"
 
   HelloLambdaFunction:
     Type: AWS::Lambda::Function
