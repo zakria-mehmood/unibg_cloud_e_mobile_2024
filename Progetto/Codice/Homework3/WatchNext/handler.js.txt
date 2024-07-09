@@ -12,7 +12,7 @@ module.exports.get_by_tag = (event, context, callback) => {
         body = JSON.parse(event.body)
     }
     // set default
-    if(!body._id) {
+    if(!body.id) {
         callback(null, {
                     statusCode: 500,
                     headers: { 'Content-Type': 'text/plain' },
@@ -29,16 +29,15 @@ module.exports.get_by_tag = (event, context, callback) => {
     
     connect_to_db().then(() => {
         console.log('=> get_all talks');
-        talk.find({_id: body._id})
+        talk.find({_id: body.id})
             .skip((body.doc_per_page * body.page) - body.doc_per_page)
             .limit(body.doc_per_page)
             .then(talks => {
-                    talk.find({_id: talks[0].watch_next_s})
-                    .sort('num_views')
+                    talk.find({_id: talks[0].watch_next})
                     .then(t => {
                         callback(null, {
                         statusCode: 200,
-                        body: JSON.stringify({id: t[0]._id, title: t[0].title, details: t[0].details, url: t[0].url})
+                        body: JSON.stringify({id: t[0]._id, title: t[0].title, details: t[0].details, url: t[0].url, watch_next: t[0].watch_next, speaker: t[0].speaker})
                     })
                 })
             })
